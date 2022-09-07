@@ -1,0 +1,19 @@
+<h1>Listado de Heroes</h1>
+<mat-divider></mat-divider> <!-- introduce una linea de division -->
+<br>
+
+<div fxLayout="row wrap" 
+     fxLayout.xs="column"
+     fxLayoutAlign="center"
+     fxLayoutGap = "20px"> <!-- aca defino la generalidades para las tarjetas, que usen filas y ajuste en ella las imagenes, pero si son muy pequenas las imagenes (xs) que las acomode en columna (esto se hizo con el fxLayout.xs), que se centren en el espacio que tengan y que la distancia entre ellas horizontal sea de 20px -->
+
+     <div   fxFlex = "20"
+            fxFlex.lg = "15"
+            fxFlex.sm= "30"
+            *ngFor="let heroe of heroes"
+     > <!-- //dentro de este segundi div meto cada tarjeta y le defino ya cuestiones consernientes a cada una. Como ser: que por defecto cada tarjeta ocupe el 20% del espacio que tenga, que cuando la pantalla sea grnade (large) (esta tomando mas de 1600 px) cada tarjeta ocupe el 15% del espacio, y que cuando la pantalla sea pequena cada tarjeta ocupe el 30% del espacio. TAMBIEN PUSE EL NGFOR en este div -->
+
+         <app-heroe-tarjeta [heroe]="heroe"></app-heroe-tarjeta>  <!-- aca estoy llamando el componen que tiene la info de las tarjetas y le estyo pasando la info de cada heroe, por eso pongo entre [] la variable heroe, y le styo pasando o igualnadola a heroe que viene en el ngFor de mas arriba, que es lo que trae la info de la BD que se esta leyendo. -->
+    
+    </div>
+</div>

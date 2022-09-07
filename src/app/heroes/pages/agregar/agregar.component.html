@@ -1,0 +1,90 @@
+<h1>{{(heroe.id ? 'Editar ' : 'Nuevo ')}} 
+    Heroe <small>{{heroe.superhero}}</small></h1> <!-- //aca uso un operador ternario para que dependiendo de si existe o no ya el ID del heroe, me ponga editar SI SI existe, o Nuevo SI NO existe aun -->
+
+<div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutGap = "40px">
+
+    <div fxFlex = "50" fxLayout="column" > 
+
+        <div flLayout="row" fxLayout.xs="column" fxLayoutGap="20px">
+            <mat-form-field fxFlex="100">
+                <mat-label>Suoper Heroe</mat-label>
+                 <input matInput
+                        type="text"
+                        [(ngModel)] = "heroe.superhero"
+                        required>
+             </mat-form-field> <!-- con el [(ngModel)] lo que hago es "tomar" el valor que me cargue en el formulario y cargarlo en el campo de heroe que le haya definido en cada caso. -->
+
+            <mat-form-field fxFlex="100">
+                <mat-label>Alter Ego</mat-label>
+                <input  matInput
+                        type="text"
+                        [(ngModel)] = "heroe.alter_ego"
+                        required>
+            </mat-form-field>
+        </div>
+
+        <mat-form-field >
+                <mat-label>Primera Aparicio</mat-label>
+                <input  matInput
+                        type="text"
+                        [(ngModel)] = "heroe.first_appearance"
+                        required>
+        </mat-form-field>
+
+        <mat-form-field >
+                <mat-label>Personajes</mat-label>
+                <input  matInput
+                        type="text"
+                        [(ngModel)] = "heroe.characters"
+                        required>
+        </mat-form-field>
+
+        <mat-form-field >
+                <mat-label>Creador</mat-label> <!-- aca se usa un select para elegir quien es wel creador. Por eso se crea en el archivo TS la variable "publisher" y se la pone aca como posiblidads de eleccion -->
+                <mat-select required
+                            [(ngModel)] = "heroe.publisher">
+                    <mat-option *ngFor="let publisher of publishers"
+                                [value] = publisher.id> <!-- aca le estyo enviando el ID, por eso lo pongo como value entre [], para pasr la info -->
+                        {{publisher.desc}}
+                    </mat-option> <!-- si bien se pasa el ID, lo que se muestra en la seleccion es la descripcion -->
+                </mat-select>
+        </mat-form-field>
+
+        <mat-form-field >
+            <mat-label>Foto Url</mat-label>
+            <input  matInput
+                    type="url"
+                    [(ngModel)] = "heroe.alt_img"
+                    required>
+        </mat-form-field>
+
+        <br>
+
+        <div fxLayout>
+
+            <button mat-raised-button 
+                    color="primary"
+                    (click)="guardar()">
+                <mat-icon> edit</mat-icon>
+                {{(heroe.id ? 'Actualizar ' : 'Crear ')}}  
+            </button> <!-- //aca uso un operador ternario para que dependiendo de si existe o no ya el ID del heroe, me ponga "actualizar" en el boton SI SI existe, o "Crear" SI NO existe aun -->
+
+            <span class="spacer"></span> <!-- esta es la clase creada a nivel global de estilos que sepera todo lo que estea sus costados. Para que esto ande debe estar en flex el contenedor, es decir, por eso al DIV que contiene los 2 botones se le pone el "fxLayout" -->
+
+            <button *ngIf="heroe.id"
+                    mat-raised-button 
+                    color="warn"
+                    (click)="borrarHeroe()"
+                    > <!-- con el ngif le estyo diciendo que si existe el ID (es decir estyo editando) y NO creando, que me aparezca el boton, sino que no aparezca nada. -->
+                <mat-icon> remove</mat-icon>
+                Borrar
+            </button>
+
+        </div>
+    
+    </div>
+
+    <div fxFlex = "50">
+        <img [src]=" heroe | imagen" > <!-- al mostrar le paso un heroe, pero al no estr definido aun debo definirlo en el TS. -->
+    </div>
+</div>

@@ -1,0 +1,58 @@
+
+
+<mat-sidenav-container fullscreen>
+
+    <mat-sidenav #sidenav mode="push">
+
+        <mat-toolbar color="primary">
+            <span>Menu</span>
+            <span class="spacer"></span>
+            <button mat-icon-button
+                    (click)="sidenav.toggle()"> <!-- En el sidenav puse una referencia local #sidenav. Y aca en el boton indico que en caso de hacer click se llame ese sidenav y se ejecute la ccion o metodo toggles que cambia el estado, es de cir de abierto a cerrado o viseversa. -->
+                    <mat-icon> menu</mat-icon> <!-- Aca dentro va el nombre del boton que queremos mostrar. Esos nombre los busco en la pagina "Material Icons Library" -->
+            </button>
+        </mat-toolbar>
+
+        <mat-nav-list>
+            <a routerLink="./listado"
+                mat-list-item
+                (click)="sidenav.toggle()">
+                <mat-icon mat-list-icon>label</mat-icon> <!-- el mat-list-item lo que hace es darle formato de icono de una lista al iconito de la etiqueta mat-icon y darle el margin necesario para que no quede pegado a span "listdo de heroes" -->
+                <span>Listado de Heroes</span>
+            </a>
+            <a routerLink="./agregar"
+                mat-list-item
+                (click)="sidenav.toggle()">
+                <mat-icon mat-list-icon>add</mat-icon>
+                <span>Aniadir heroe</span>
+            </a>
+            <a routerLink="./buscar"
+                mat-list-item
+                (click)="sidenav.toggle()">
+                <mat-icon mat-list-icon>search</mat-icon>
+                <span>Buscar heroe</span>
+            </a>
+        </mat-nav-list>
+
+    </mat-sidenav>
+
+    <mat-toolbar>
+        <button mat-icon-button
+                (click)="sidenav.toggle()"> <!-- En el sidenav puse una referencia local #sidenav. Y aca en el boton indico que en caso de hacer click se llame ese sidenav y se ejecute la ccion o metodo toggles que cambia el estado, es de cir de abierto a cerrado o viseversa. -->
+            <mat-icon> menu</mat-icon> <!-- Aca dentro va el nombre del boton que queremos mostrar. Esos nombre los busco en la pagina "Material Icons Library" -->
+        </button>
+        <span class="spacer"></span>
+        <span> {{auth.usuario}}</span> <!-- //aca estoy trayendo con el servicio authService el nombre del usuario logueado e imprimiendolo. -->
+       <!--  ahora voy a agragar otro boton, pero que este bien a la derecha que sea para hacer el logout y que me lleve a la pagina de login. Por eso creo el boton y para poner a la derecha uso flex, creando en los estilos globales "styles.css" y creo una clase spacer que lo que hara sera llevar todo el contenido hacia los costados, esa clase spacer es la que esta colocada en el span que aparece entre los 2 botones asi manda a cada uno para un lado.-->
+       <button mat-button
+            (click)="logout()"> 
+           Logout
+        </button>
+
+
+    </mat-toolbar>
+
+    <div class="container"> <!-- pongo el router-outlet dentro de un div, porque le creo una clase que estara definida en los "Styles" del home.component.ts porque solo se aplicara a este componente, y sera solo un margin para que el contenido no aparezca tan pegado a los bordes. -->
+        <router-outlet></router-outlet> <!-- esta etiqueta se pone para que me habilite las rutas, sino al clikear sobre las opciones de la LISTA del SIDENAV NO funcionara el routerLink. -->
+    </div>
+</mat-sidenav-container>

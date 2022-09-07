@@ -1,0 +1,15 @@
+<h1>Esta seguro?</h1>
+
+<hr>
+
+<p>
+    Esta a punto de borara a {{data.superhero}}
+    <br> <!-- aca gracias al @inject del componente me traje desde el padre (componente agregar) la info de heroem, y por eso la puedo mostrar aca en el dialogo. -->
+    Desea continuar?
+</p>
+
+<div>
+    <button mat-button color="warn" (click)="borrar()"> Si, borrar</button>
+    <span class= "spacer"></span>
+    <button mat-button  (click)="cerrar()"> Cancelar </button>
+</div>

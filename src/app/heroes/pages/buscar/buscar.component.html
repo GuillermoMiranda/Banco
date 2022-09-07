@@ -1,0 +1,42 @@
+
+
+<div fxLayout="column">
+    <div>
+
+        <h1>Buscador de Heroes</h1>
+        <mat-divider></mat-divider>
+    </div>
+
+    <div>
+        <h3>Buscador</h3>
+        <mat-form-field>  <!-- ESTO SE VIO EN CLASE 198 -->
+            <input type="text"
+               placeholder="Pick one"
+               aria-label="Number"
+               matInput
+               [(ngModel)] = "termino" 
+               [matAutocomplete]="auto"
+               (input) = buscando()>
+            <mat-autocomplete autoActiveFirstOption 
+                              #auto="matAutocomplete"
+                              (optionSelected)="opcionSeleccionada( $event) "> <!-- esto de optionSelected es un evento que tiene el autocomplete que se usa para saber y poder pescar cual es la opcion que selecciono el usuario. Ese tipo de evento lo vinculo con un metodo "opcionSeleccionada" que tiene como input ese evento.Este metodo "opcionSeleccionada" lo defino en buscar.component.ts -->
+                <mat-option *ngFor="let heroe of heroes" [value]="heroe">
+                    {{heroe.superhero}}
+                </mat-option>
+                <mat-option [value]="" *ngIf="heroes.length === 0 && termino.trim().length > 0">
+                    No hay resultados
+                </mat-option>
+            </mat-autocomplete>
+                        
+        </mat-form-field>
+
+    </div>
+
+    <div>
+        <pre> {{heroeSeleccionado | json}}</pre> <!-- en la variable heroSeleccionado tengo toda la info que viene en mi solicitud http. -->
+    </div>
+
+    <div *ngIf="heroeSeleccionado">
+        <app-heroe-tarjeta [heroe] = "heroeSeleccionado"></app-heroe-tarjeta>
+    </div>
+</div>
